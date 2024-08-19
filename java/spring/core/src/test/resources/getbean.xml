@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="factory" class="site.shug.spring.core.BaseExampleFactory"/>
+    <bean id="dep" class="site.shug.spring.core.BeanExampleDep"/>
+    <bean id="beanExample0" class="site.shug.spring.core.BeanExample"/>
+    <bean id="beanExample1" class="site.shug.spring.core.BeanExample" factory-method="createInstance"/>
+    <bean id="beanExample11" class="site.shug.spring.core.BeanExample" factory-method="createInstance1">
+        <constructor-arg value="createInstance1"/>
+        <constructor-arg value="1"/>
+    </bean>
+    <bean id="beanExample2" factory-bean="factory" factory-method="createBeanExample"/>
+    <bean id="beanExample3" class="site.shug.spring.core.BeanExample">
+        <constructor-arg value="shug"/>
+        <constructor-arg value="18"/>
+        <constructor-arg ref="dep"/>
+        <constructor-arg>
+            <list value-type="java.lang.Integer">
+                <value>1</value>
+            </list>
+        </constructor-arg>
+        <constructor-arg>
+            <set value-type="java.lang.Integer">
+                <value>1</value>
+            </set>
+        </constructor-arg>
+        <constructor-arg>
+            <map key-type="java.lang.String" value-type="java.lang.Integer">
+                <entry key="user" value="1">
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+    <bean id="beanExample4" class="site.shug.spring.core.BeanExample">
+        <property name="name" value="shug"/>
+        <property name="age" value="18"/>
+        <property name="dep" ref="dep"/>
+        <property name="list">
+            <list value-type="java.lang.Integer">
+                <value>1</value>
+            </list>
+        </property>
+        <property name="set">
+            <set value-type="java.lang.Integer">
+                <value>1</value>
+            </set>
+        </property>
+        <property name="map">
+            <map key-type="java.lang.String" value-type="java.lang.Integer">
+                <entry key="user" value="1">
+                </entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="beanExample5" class="site.shug.spring.core.BeanExample">
+        <property name="dep">
+            <bean class="site.shug.spring.core.BeanExampleDep"/>
+        </property>
+    </bean>
+</beans>
