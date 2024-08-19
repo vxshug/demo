@@ -2,6 +2,7 @@ package site.shug.spring.core;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 public class BeanExample {
@@ -11,7 +12,14 @@ public class BeanExample {
     public List<Integer> list;
     public Set<Integer> set;
     public Map<String,Integer> map;
+    public Properties properties;
 
+    public Properties getProperties() {
+        return properties;
+    }
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
     public List<Integer> getList() {
         return list;
     }
@@ -34,6 +42,7 @@ public class BeanExample {
         return dep;
     }
     public void setDep(BeanExampleDep dep) {
+        System.out.println("setDep");
         this.dep = dep;
     }
     public Integer getAge() {
@@ -57,14 +66,15 @@ public class BeanExample {
         this.age = age;
         System.out.println("site.shug.sping.core.BeanExample(String name, Integer age)");
     }
-    public BeanExample(String name, Integer age, BeanExampleDep dep, List<Integer> list, Set<Integer> set, Map<String,Integer> map) {
+    public BeanExample(String name, Integer age, BeanExampleDep dep, List<Integer> list, Set<Integer> set, Map<String,Integer> map, Properties properties) {
         this.name = name;
         this.age = age;
         this.dep = dep;
         this.list = list;
         this.set = set;
         this.map = map;
-        System.out.println("site.shug.sping.core.BeanExample(String name, Integer age, BeanExampleDep dep, List<Integer> list, Set<Integer> set, Map<String,Integer> map)");
+        this.properties = properties;
+        System.out.println("site.shug.sping.core.BeanExample(String name, Integer age, BeanExampleDep dep, List<Integer> list, Set<Integer> set, Map<String,Integer> map, Properties properties)");
     }
     public BeanExample() {
         System.out.println("site.shug.sping.core.BeanExample");
@@ -80,6 +90,6 @@ public class BeanExample {
 
     @Override
     public String toString() {
-        return "My name is " + name + " and age is " + age + " and dep is " + dep + " and list is " + list + " and set is " + set + " and map is " + map;
+        return "My name is " + name + " and age is " + age + " and dep is " + dep + " and list is " + list + " and set is " + set + " and map is " + map + " and properties is " + properties;
     }
 }

@@ -31,11 +31,19 @@
                 </entry>
             </map>
         </constructor-arg>
+        <constructor-arg>
+            <value>
+                jdbc.driver.className=com.mysql.jdbc.Driver
+                jdbc.url=jdbc:mysql://localhost:3306/mydb
+            </value>
+        </constructor-arg>
     </bean>
     <bean id="beanExample4" class="site.shug.spring.core.BeanExample">
         <property name="name" value="shug"/>
         <property name="age" value="18"/>
-        <property name="dep" ref="dep"/>
+        <property name="dep">
+            <null />
+        </property>
         <property name="list">
             <list value-type="java.lang.Integer">
                 <value>1</value>
@@ -51,6 +59,12 @@
                 <entry key="user" value="1">
                 </entry>
             </map>
+        </property>
+        <property name="properties">
+            <props merge="true">
+                <prop key="sales">sales@example.com</prop>
+                <prop key="support">support@example.co.uk</prop>
+            </props>
         </property>
     </bean>
     <bean id="beanExample5" class="site.shug.spring.core.BeanExample">
