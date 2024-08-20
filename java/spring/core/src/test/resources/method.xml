@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="site.shug.spring.method.NoSingleBean" id="noSingleBean" scope="prototype" />
+    <bean class="site.shug.spring.method.SingleBean" id="singleBean" />
+    <bean class="site.shug.spring.method.NoSingleBeanLook" id="noSingleBeanLook" scope="prototype" />
+    <bean class="site.shug.spring.method.SingleBeanLook" id="singleBeanLook">
+        <lookup-method name="getNoSingleBean" bean="noSingleBeanLook" />
+    </bean>
+    <bean class="site.shug.spring.method.ReplaceMethod" id="replaceMethod" />
+    <bean class="site.shug.spring.method.Replacer" id="replacer" >
+        <replaced-method name="sayHello" replacer="replaceMethod">
+            <arg-type>String</arg-type>
+        </replaced-method>
+    </bean>
+
+</beans>

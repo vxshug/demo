@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean class="site.shug.spring.autowire.AutoWire2" id="autoWire2" />
-    <bean class="site.shug.spring.autowire.AutoWire1" id="autoWire1" autowire="byName" />
+    <bean class="site.shug.spring.lifecycle.InitializingBeanLife" name="initializingBeanLife" />
+    <bean class="site.shug.spring.lifecycle.DisposableBeanLife" name="disposableBeanLife" />
+    <bean class="site.shug.spring.lifecycle.LifecycleLife" name="life" />
 </beans>
