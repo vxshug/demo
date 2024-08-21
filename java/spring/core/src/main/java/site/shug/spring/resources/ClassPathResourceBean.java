@@ -3,8 +3,7 @@ package site.shug.spring.resources;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -13,14 +12,11 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
-/**
- * UrlResource通过URL访问对象, 例如https, http, ftp, file
- */
-@Component
 @Configurable
-public class UrlResourceBean {
-    @Value("https://github.com")
-    private UrlResource resource;
+@Component
+public class ClassPathResourceBean {
+    @Value("properties.properties")
+    private ClassPathResource resource;
 
     private String body;
 
@@ -31,7 +27,7 @@ public class UrlResourceBean {
 
     @Override
     public String toString() {
-        return "UrlResourceBean{" +
+        return "ClassPathResourceBean{" +
                 "body='" + body + '\'' +
                 '}';
     }

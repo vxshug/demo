@@ -1,0 +1,23 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 启用自动代理 -->
+    <aop:aspectj-autoproxy/>
+    <bean class="site.shug.spring.aop.xml.LogAspect" name="logAspect" />
+    <bean class="site.shug.spring.aop.xml.XmlCalculatorImpl" name="calculator" />
+    <aop:config>
+        <aop:aspect ref="logAspect" >
+            <aop:pointcut id="pointcutAdd" expression="execution(public int site.shug.spring.aop.xml.XmlCalculatorImpl.add(..))"/>
+            <aop:before method="before" pointcut-ref="pointcutAdd" />
+            <aop:after method="after" pointcut-ref="pointcutAdd" />
+            <aop:after-returning method="afterReturningMut" returning="result" pointcut-ref="pointcutAdd" />
+            <aop:after-throwing method="afterThrowingMultiply" pointcut="execution(public int site.shug.spring.aop.xml.XmlCalculatorImpl.multiply(..))" throwing="ex" />
+            <aop:around method="around" pointcut="execution(public int site.shug.spring.aop.xml.XmlCalculatorImpl.divide(..))" />
+        </aop:aspect>
+    </aop:config>
+</beans>
