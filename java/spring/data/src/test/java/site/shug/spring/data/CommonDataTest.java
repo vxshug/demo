@@ -9,13 +9,15 @@ import site.shug.spring.common.repository.UserRepository;
 
 @SpringJUnitConfig(classes = JdbcConfig.class)
 public class CommonDataTest {
+
     @Autowired
     UserRepository repository;
     @Test
     public void testDb() {
-        User user = new User();
+        User user = new User(0L, "shug", 12);
         user.setAge(12);
         user.setName("shug");
+        user.setId(null);
         repository.save(user);
         repository.findAll().forEach(System.out::println);
     }
