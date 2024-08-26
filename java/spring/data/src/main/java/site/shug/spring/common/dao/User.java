@@ -4,7 +4,14 @@ import org.springframework.data.annotation.AccessType;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.AfterDomainEventPublication;
+import org.springframework.data.domain.DomainEvents;
 import org.springframework.data.relational.core.mapping.Table;
+import site.shug.spring.common.event.UserCreatedEvent;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 // 用于配置从类到数据库表的映射的注释。
 @Table
@@ -64,6 +71,27 @@ public class User {
     public void setName(String name) {
         System.out.println("注入name属性: " + name);
         this.name = name;
+    }
+
+
+    /**
+     * 调用下列方法将触发事件
+     * save(…), saveAll(…)
+     * save(…) ， saveAll(…)
+     * delete(…), deleteAll(…), deleteAllInBatch(…), deleteInBatch(…)
+     * delete(…) 、 deleteAll(…) 、 deleteAllInBatch(…) 、 deleteInBatch(…)
+     */
+    @DomainEvents
+    public Collection<Object> domainEvents() {
+        List<Object> events = new ArrayList<>();
+        System.out.println("domainEvents");
+        events.add(new UserCreatedEvent(this));
+        return events;
+    }
+
+    @AfterDomainEventPublication
+    public void clearDomainEvents() {
+        // 清除或重置领域事件，防止重复发布
     }
 
     @Override
