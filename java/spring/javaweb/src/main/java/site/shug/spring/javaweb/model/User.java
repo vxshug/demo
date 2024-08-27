@@ -1,4 +1,4 @@
-package site.shug.spring.mvc.model;
+package site.shug.spring.javaweb.model;
 
 public class User {
     public String name;

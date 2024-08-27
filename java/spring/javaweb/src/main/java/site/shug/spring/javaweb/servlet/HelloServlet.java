@@ -1,4 +1,4 @@
-package site.shug.spring.mvc.servlet;
+package site.shug.spring.javaweb.servlet;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

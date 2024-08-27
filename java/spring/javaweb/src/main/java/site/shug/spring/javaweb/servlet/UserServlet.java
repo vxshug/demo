@@ -1,11 +1,11 @@
-package site.shug.spring.mvc.servlet;
+package site.shug.spring.javaweb.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import site.shug.spring.mvc.model.User;
+import site.shug.spring.javaweb.model.User;
 
 import java.io.IOException;
 

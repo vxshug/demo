@@ -11,8 +11,7 @@ repositories {
 }
 
 dependencies {
-    // spring mvc依赖
-    implementation("org.springframework:spring-webmvc:6.1.12")
+    // java web依赖
     implementation("jakarta.servlet:jakarta.servlet-api:6.1.0")
     implementation("org.apache.tomcat.embed:tomcat-embed-core:11.0.0-M24")
     implementation("org.apache.tomcat.embed:tomcat-embed-jasper:11.0.0-M24")

@@ -1,17 +1,11 @@
-package site.shug.spring.mvc;
+package site.shug.spring.javaweb;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.connector.Connector;
 import org.apache.catalina.startup.Tomcat;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 public class Main {
 
@@ -22,7 +16,7 @@ public class Main {
         connector.setPort(8080);
         tomcat.setConnector(connector);
 
-        Context context = tomcat.addWebapp("", new File("mvc/build/libs/mvc-1.0-SNAPSHOT.war").getAbsolutePath());
+        Context context = tomcat.addWebapp("", new File("javaweb/build/libs/javaweb-1.0-SNAPSHOT.war").getAbsolutePath());
 //        Tomcat.addServlet(context, "MVC", new HttpServlet() {
 //            @Override
 //            protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
