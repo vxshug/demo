@@ -8,16 +8,24 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -30,11 +38,13 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import site.shug.spring.mvc.filter.FixedUserFilter;
 import site.shug.spring.mvc.handler.ChatHandler;
 import site.shug.spring.mvc.handler.ChatHandshakeInterceptor;
+import site.shug.spring.mvc.handler.CustomAccessDeniedHandler;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -48,6 +58,7 @@ import java.util.TimeZone;
 @EnableWebMvc
 @EnableWebSocket
 @EnableWebSecurity
+@EnableMethodSecurity
 public class WebConfig implements WebMvcConfigurer, WebApplicationInitializer {
     /**
      * DelegatingFilterProxy可以将Spring容器的Bean在Filter中使用
@@ -61,8 +72,8 @@ public class WebConfig implements WebMvcConfigurer, WebApplicationInitializer {
         proxy.setTargetBeanName("myResponseFilter");
         FilterRegistration.Dynamic filter = servletContext.addFilter("MyFilter", proxy);
         FilterRegistration.Dynamic springSecurityFilter = servletContext.addFilter("springSecurityFilter", springSecurityFilterChain);
-        springSecurityFilter.addMappingForUrlPatterns(null, false, "/*");
         filter.addMappingForUrlPatterns(null, false, "/*");
+        springSecurityFilter.addMappingForUrlPatterns(null, false, "/*");
     }
 
 
@@ -123,24 +134,46 @@ public class WebConfig implements WebMvcConfigurer, WebApplicationInitializer {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, UserDetailsService userDetailsService,
+                                           PasswordEncoder passwordEncoder) throws Exception {
+        FixedUserFilter fixedUserFilter = new FixedUserFilter();
         http
+                .exceptionHandling(ex -> ex.accessDeniedHandler(new CustomAccessDeniedHandler())) // 认证失败的处理器
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(new AntPathRequestMatcher("/blog/**")).permitAll() // 允许/blog/*的路径
+                        .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/private/*")).hasAuthority("PRIVATE")
                         .anyRequest().authenticated() // 其他路径全部需要授权
                 )
-                .formLogin(formLogin -> formLogin
-                        .loginPage("/login") // 放行login为登录路径
-                        .permitAll()
-                )
+//                .formLogin(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable) // 禁用csrf
+                .addFilterBefore(fixedUserFilter, AnonymousAuthenticationFilter.class)
                 .rememberMe(Customizer.withDefaults());
 
         return http.build();
     }
 
     @Bean
+    public AuthenticationManager authenticationManager(
+            UserDetailsService userDetailsService,
+            PasswordEncoder passwordEncoder) {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder);
+        return new ProviderManager(authenticationProvider);
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+
+    @Bean
     public UserDetailsService createUserDetailsService() {
-        UserDetails user = new User("user", "user", new ArrayList<>());
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ADMIN"));
+
+        UserDetails user = new User("user", "{noop}user", authorities);
         return new InMemoryUserDetailsManager(user);
     }
 }

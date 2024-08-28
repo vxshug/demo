@@ -22,6 +22,8 @@ dependencies {
     // 加入Json支持
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
 
+    implementation("jakarta.servlet:jakarta.servlet-api:6.1.0")
+
     implementation("org.apache.tomcat.embed:tomcat-embed-core:11.0.0-M24")
     implementation("org.apache.tomcat.embed:tomcat-embed-jasper:11.0.0-M24")
     implementation("org.apache.tomcat.embed:tomcat-embed-websocket:11.0.0-M24")

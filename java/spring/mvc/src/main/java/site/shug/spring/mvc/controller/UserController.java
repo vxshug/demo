@@ -17,7 +17,7 @@ import java.util.Locale;
  * 默认Spring MVC是不json的
  */
 
-@RestController("/")
+@RestController
 public class UserController {
     @Autowired
     LocaleResolver localeResolver;
@@ -31,6 +31,7 @@ public class UserController {
 
     @PostMapping("/login")
     public UserRequest login(@RequestBody UserRequest user) {
+
         UsernamePasswordAuthenticationToken authenticationToken = UsernamePasswordAuthenticationToken.unauthenticated(user.name, user.password);
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
         return user;
