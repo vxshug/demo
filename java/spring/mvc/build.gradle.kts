@@ -14,6 +14,9 @@ dependencies {
     implementation("org.springframework:spring-beans:6.1.12")
     implementation("org.springframework:spring-context:6.1.12")
     implementation("org.springframework:spring-websocket:6.1.12")
+    // Spring Security
+    implementation("org.springframework.security:spring-security-web:6.3.3")
+    implementation("org.springframework.security:spring-security-config:6.3.3")
     // 导入jakarta的注解
     implementation("jakarta.annotation:jakarta.annotation-api:2.1.1")
     // 加入Json支持

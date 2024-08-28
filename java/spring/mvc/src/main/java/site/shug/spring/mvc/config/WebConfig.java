@@ -8,9 +8,18 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.filter.DelegatingFilterProxy;
-import org.springframework.web.servlet.HandlerAdapter;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -21,11 +30,11 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-import site.shug.spring.mvc.filter.MyResponseFilter;
 import site.shug.spring.mvc.handler.ChatHandler;
 import site.shug.spring.mvc.handler.ChatHandshakeInterceptor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -38,6 +47,7 @@ import java.util.TimeZone;
 @ComponentScan(basePackages = "site.shug.spring.mvc")
 @EnableWebMvc
 @EnableWebSocket
+@EnableWebSecurity
 public class WebConfig implements WebMvcConfigurer, WebApplicationInitializer {
     /**
      * DelegatingFilterProxy可以将Spring容器的Bean在Filter中使用
@@ -45,10 +55,13 @@ public class WebConfig implements WebMvcConfigurer, WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         System.out.println("OnStartup");
+        DelegatingFilterProxy springSecurityFilterChain = new DelegatingFilterProxy("springSecurityFilterChain");
         DelegatingFilterProxy proxy = new DelegatingFilterProxy();
         // 代理Bean的名称
         proxy.setTargetBeanName("myResponseFilter");
         FilterRegistration.Dynamic filter = servletContext.addFilter("MyFilter", proxy);
+        FilterRegistration.Dynamic springSecurityFilter = servletContext.addFilter("springSecurityFilter", springSecurityFilterChain);
+        springSecurityFilter.addMappingForUrlPatterns(null, false, "/*");
         filter.addMappingForUrlPatterns(null, false, "/*");
     }
 
@@ -107,5 +120,27 @@ public class WebConfig implements WebMvcConfigurer, WebApplicationInitializer {
                 registry.addHandler(chatHandler, "/chat").addInterceptors(chatInterceptor);
             }
         };
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(new AntPathRequestMatcher("/blog/**")).permitAll() // 允许/blog/*的路径
+                        .anyRequest().authenticated() // 其他路径全部需要授权
+                )
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/login") // 放行login为登录路径
+                        .permitAll()
+                )
+                .rememberMe(Customizer.withDefaults());
+
+        return http.build();
+    }
+
+    @Bean
+    public UserDetailsService createUserDetailsService() {
+        UserDetails user = new User("user", "user", new ArrayList<>());
+        return new InMemoryUserDetailsManager(user);
     }
 }

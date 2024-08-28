@@ -4,6 +4,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.LocaleResolver;
 import site.shug.spring.mvc.request.UserRequest;
@@ -23,8 +26,13 @@ public class UserController {
     @Qualifier("i18n")
     MessageSource messageSource;
 
+    @Autowired
+    AuthenticationManager authenticationManager;
+
     @PostMapping("/login")
     public UserRequest login(@RequestBody UserRequest user) {
+        UsernamePasswordAuthenticationToken authenticationToken = UsernamePasswordAuthenticationToken.unauthenticated(user.name, user.password);
+        Authentication authentication = authenticationManager.authenticate(authenticationToken);
         return user;
     }
 
