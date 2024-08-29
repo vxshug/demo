@@ -17,6 +17,14 @@ dependencies {
     // Spring Security
     implementation("org.springframework.security:spring-security-web:6.3.3")
     implementation("org.springframework.security:spring-security-config:6.3.3")
+    // oauth2认证服务端
+    implementation("org.springframework.security:spring-security-oauth2-authorization-server:1.3.2")
+    // oauth2认证客户端
+    implementation("org.springframework.security:spring-security-oauth2-client:6.3.3")
+    // oauth2资源服务器
+    implementation("org.springframework.security:spring-security-oauth2-resource-server:6.3.3")
+
+
     // 导入jakarta的注解
     implementation("jakarta.annotation:jakarta.annotation-api:2.1.1")
     // 加入Json支持

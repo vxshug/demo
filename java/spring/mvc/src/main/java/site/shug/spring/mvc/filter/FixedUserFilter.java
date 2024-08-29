@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FixedUserFilter extends GenericFilterBean {
-    private SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder
+    private final SecurityContextHolderStrategy securityContextHolderStrategy = SecurityContextHolder
             .getContextHolderStrategy();
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
