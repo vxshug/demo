@@ -18,6 +18,8 @@ dependencies {
     // coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0-RC.2")
 
+    // 反射依赖
+    implementation(kotlin("reflect"))
     testImplementation(kotlin("test"))
 }
 
