@@ -45,16 +45,23 @@ interface IStaticAbstract
 
 interface IStaticVirtual<T> where T : IStaticVirtual<T>
 {
-    public static virtual int AReturnOne()
+    public static virtual int SReturnOne()
     {
         return 1;
     }
+
+    public static int SReturnTwo()
+    {
+        return T.SReturnOne();
+    }
 }
 
-class MyClass: IStaticVirtual<MyClass>
+class MyClass: IStaticVirtual<MyClass>, IStaticAbstract
 {
+    // AReturnOne是抽象方法, 必须实现
     public static int AReturnOne()
     {
+        
         return 11;
     }
 }
@@ -69,8 +76,14 @@ public class InterfaceTest
     }
 
     [TestMethod]
-    public void TestIStaticVirtual()
+    public void TestStaticAbstractFunction()
     {
         Assert.AreEqual(11, MyClass.AReturnOne());
+    }
+    [TestMethod]
+    public void TestIStaticVirtual()
+    {
+        // 调用默认的SReturnOne实现, 如果MyClass重写SReturnOne, 将调用子类的SReturnOne
+        Assert.AreEqual(1, IStaticVirtual<MyClass>.SReturnTwo());
     }
 }

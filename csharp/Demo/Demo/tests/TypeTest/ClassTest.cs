@@ -89,11 +89,57 @@ class Template(string Label) // 主构造函数
 
 class ChildTemplate(string Label): Template
 {
-    
+}
+
+// 定义抽象类, 抽象类不能实例化
+abstract class AbParent
+{
+    // 抽象方法, 可以不实现
+    public abstract int Function();
+}
+
+class AbImp: AbParent
+{
+    public override int Function()
+    {
+        return 1;
+    }
+}
+
+class VirtualParent
+{
+    // virtual函数要有默认实现
+    public virtual int Function()
+    {
+        return 0;
+    }
+}
+
+class InhertVirtual: VirtualParent
+{
+    public override int Function()
+    {
+        // 在基类的返回值上加1
+        return base.Function() + 1;
+    }
 }
 
 [TestClass]
 public class ClassTest
 {
-    
+    [TestMethod]
+    public void TestAbstract()
+    {
+        var impl = new AbImp();
+        Assert.AreEqual(1, impl.Function());
+    }
+
+    [TestMethod]
+    public void TestVirtual()
+    {
+        var vp = new VirtualParent();
+        var vpc = new InhertVirtual();
+        Assert.AreEqual(0, vp.Function());
+        Assert.AreEqual(1, vpc.Function());
+    }
 }

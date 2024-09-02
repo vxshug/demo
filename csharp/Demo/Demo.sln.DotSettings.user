@@ -34,5 +34,9 @@
     &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.OverviewTest.TestDynamic&lt;/TestId&gt;
     &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.InterfaceTest.TestStatic&lt;/TestId&gt;
     &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.InterfaceTest.TestIStaticVirtual&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.InterfaceTest.TestStaticAbstractFunction&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.InterfaceTest.TestStaticFunction&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.ClassTest.TestAbstract&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.ClassTest.TestVirtual&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
