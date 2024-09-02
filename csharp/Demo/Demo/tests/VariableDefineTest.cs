@@ -55,4 +55,42 @@ public class VariableDefineTest
         char charValue = 'a'; // 16位
         Assert.AreEqual(charValue, 'a');
     }
+    
+    [TestMethod]
+    public void TestVar()
+    {
+        // var 定义变量可以自动推导类型, 仅适用于局部变量
+        var i = 1;
+        Assert.AreEqual(1, i);
+
+        // new表达式
+        List<int> xs = new();
+    }
+
+    /**
+     * reference 变量是引用另一个变量（称为引用）的变量。
+     * 也就是说，reference 变量是其引用的别名。
+     * 向 reference 变量赋值时，该值将分配给引用。
+     * 读取 reference 变量的值时，将返回引用的值。
+     */
+    [TestMethod]
+    public void TestReference()
+    {
+        int i = 1;
+        ref int j = ref i;
+        j = 2;
+        Assert.AreEqual(i, j);
+        Assert.AreEqual(2, i);
+        
+        int newValue = 10;
+        j = ref newValue; // 使用j引用新的变量
+        
+        // 只读引用, 只能读取变量, 不能写入
+        ref readonly int readOnlyRef = ref newValue;
+        Assert.AreEqual(10, readOnlyRef);
+        
+        // 可以修改newValue, 但是不能通过readOnlyRef修改
+        newValue = 20;
+        Assert.AreEqual(20, readOnlyRef);
+    }
 }

@@ -1,5 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AImmutableDictionary_00602_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003F6e0894da0cff4cd39fc3b60f8eeecf30f600_003F62_003F62ee5f6a_003FImmutableDictionary_00602_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AInt32_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003Fbc1d76b9965449cf84649bc8d6b5b9c5c63600_003F72_003F6561d0b8_003FInt32_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AString_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FLibrary_003FApplication_0020Support_003FJetBrains_003FRider2024_002E2_003Fresharper_002Dhost_003FDecompilerCache_003Fdecompiler_003Fbc1d76b9965449cf84649bc8d6b5b9c5c63600_003Fd8_003F2bab87dc_003FString_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
   &lt;Assembly Path="/opt/homebrew/Cellar/dotnet/8.0.4/libexec/packs/Microsoft.NETCore.App.Ref/8.0.4/ref/net8.0/System.ObjectModel.dll" /&gt;
   &lt;Assembly Path="/opt/homebrew/Cellar/dotnet/8.0.4/libexec/packs/Microsoft.NETCore.App.Ref/8.0.4/ref/net8.0/System.Collections.Immutable.dll" /&gt;
@@ -15,5 +17,22 @@
     &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.CollectionsTest.TestSet&lt;/TestId&gt;
     &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.CollectionsTest.TestSortedList&lt;/TestId&gt;
     &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.CollectionsTest.TestHashTable&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.OverviewTest.TestVar&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.VariableDefineTest.TestReference&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.OverviewTest.TestTypeSystem&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.StructTest.TestStruct&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.StructTest.TestDefault&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.StructTest.TestWith&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.RefStructTest.TestRefStruct&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.TupleTest.TestTuple&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.NullTest.TestNull&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.StringTest.TestConcat&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.StringTest.TestLiteral&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.DelegateTest.TestDegate&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.DelegateTest.TestMutilDegate&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.DelegateTest.TestFunc&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.OverviewTest.TestDynamic&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.InterfaceTest.TestStatic&lt;/TestId&gt;
+    &lt;TestId&gt;MSTest::06200139-CC89-4D20-A8C7-A43D837ACC29::net8.0::Demo.tests.TypeTest.InterfaceTest.TestIStaticVirtual&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
