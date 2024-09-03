@@ -43,5 +43,30 @@ public record class RecordStructPerson
 [TestClass]
 public class RecordTest
 {
-    
+    [TestMethod]
+    public void TestRecord()
+    {
+        var person = new RecordPerson("shug", "last");
+        var personRef = person;
+        Assert.AreEqual("shug", person.FirstName);
+        // ReferenceEquals比较两个引用是否指向同一个地址
+        Assert.IsTrue(Object.ReferenceEquals(person, personRef));
+    }
+
+    [TestMethod]
+    public void TestRecordClassPerson()
+    {
+        var person = new RecordClassPerson("shug", "last");
+        var personRef = person;
+        Assert.IsTrue(Object.ReferenceEquals(person, personRef));
+    }
+
+    [TestMethod]
+    public void TestRecordStructPerson()
+    {
+        var person = new RecordStructPerson("shug", "last");
+        var personRef = person;
+        // 值类型发生装箱, 引用的对象不一样
+        Assert.IsFalse(Object.ReferenceEquals(person, personRef));
+    }
 }

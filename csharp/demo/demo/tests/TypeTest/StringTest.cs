@@ -26,5 +26,10 @@ public class StringTest
         
         var string1 = @"Hello \World"; // 不处理转义序列
         Assert.AreEqual("Hello \\World", string1);
+
+        // 内插字符串
+        var age = 18;
+        var string2 = $"Hello {age}";
+        Assert.AreEqual("Hello 18", string2);
     }
 }
