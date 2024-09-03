@@ -3,4 +3,4 @@ obj/
 /packages/
 riderModule.iml
 /_ReSharper.Caches/
-Demo.sln.DotSettings.user
+*.DotSettings.user
