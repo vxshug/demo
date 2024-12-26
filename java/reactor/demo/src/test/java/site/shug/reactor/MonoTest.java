@@ -170,4 +170,40 @@ public class MonoTest {
                     }
                 });
     }
+
+    /**
+     * {@code Mono.deferContextual()} 根据just的参数创建Mono
+     */
+    @Test
+    void testContext() {
+        Mono.just(1)
+                .flatMap(obj -> Mono.deferContextual(context -> {
+                    System.out.println(context);
+                    return Mono.just(2);
+                }))
+                .contextWrite(context -> context.put("hello", "1"))
+                .subscribe(new Subscriber<>() {
+
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(Long.MAX_VALUE);
+                        System.out.println("onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        System.out.println("onNext: " + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        System.out.println("onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        System.out.println("onComplete");
+                    }
+                });
+    }
 }

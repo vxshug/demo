@@ -10,7 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation("io.projectreactor:reactor-core:3.6.9")
+    implementation("io.projectreactor:reactor-core:3.7.1")
+    testImplementation("io.projectreactor:reactor-test:3.7.1")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
